@@ -25,13 +25,11 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-websockets = "9.1"
+python = ">=3.7.2,<3.11"
+websockets = "^10.3"
 pytest-asyncio = "^0.15.1"
-web3 = "^5.18.0"
-eth-utils = "^1.10.0"
-eth-abi = "^2.1.1"
-eth-brownie = "^1.14.6"
+web3 = "^6.0.0b4"
+eth-brownie = { git = "https://github.com/sasha00123/brownie.git", rev="68a149fbc7b00cd1b6dd21aa45516d4dd5fbad28" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.3"
