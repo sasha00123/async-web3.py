@@ -71,7 +71,7 @@ class AsyncWeb3:
         return Wei(await self._do_request(RPCMethod.eth_getTransactionCount, [address, block_identifier]))
 
     async def get_storage_at(
-        self, address: Address, storage_position: Union[int, str], block: Any
+            self, address: Address, storage_position: Union[int, str], block: Any
     ) -> str:
         if isinstance(block, str) and block in ["latest", "earliest", "pending"]:
             block_param = block
@@ -107,6 +107,13 @@ class AsyncWeb3:
 
     async def get_raw_transaction(self, txhash):
         return await self._do_request(RPCMethod.eth_getRawTransactionByHash, [txhash])
+
+    async def get_logs(self, **kwargs):
+        for key in ['fromBlock', 'toBlock']:
+            if key in kwargs and isinstance(kwargs[key], int):
+                kwargs[key] = hex(kwargs[key])
+
+        return await self._do_request(RPCMethod.eth_getLogs, [kwargs])
 
     async def subscribe_block(self) -> Subscription:
         return await self._do_subscribe("newHeads")
